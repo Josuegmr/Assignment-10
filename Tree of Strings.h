@@ -52,6 +52,26 @@ public:
 };
 
 
+template<class Item>
+void write_tree(const string& prefix, binary_tree_node<Item>* node, bool isLeft, bool root, bool last, ofstream &outFile)
+{
+	if (node != NULL)
+	{
+		if (!root)
+		{
+			outFile << node->getData() << '\n';
+		}
+		else
+			outFile << node->getData() << '\n';
+
+
+		// enter the next tree level - left and right branch
+		string s = "    ";
+		s[0] = char(179);
+		write_tree(prefix + (isLeft ? s : "    "), node->getLeft(), true, false, false, outFile);
+		write_tree(prefix + (isLeft ? s : "    "), node->getRight(), false, false, true, outFile);
+	}
+}
 
 template<class Item>
 void print_tree(const string& prefix, binary_tree_node<Item>* node, bool isLeft, bool root, bool last)
